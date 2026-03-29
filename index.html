@@ -15,7 +15,10 @@
   <!-- Navigation -->
   <nav id="nav">
     <div class="nav-inner">
-      <span class="nav-label">Research</span>
+      <div class="nav-brand">
+        <div class="nav-dot"></div>
+        <span class="nav-label">Research</span>
+      </div>
       <ul class="nav-links">
         <li><a href="#abstract">Abstract</a></li>
         <li><a href="#problem">Problem</a></li>
@@ -34,29 +37,28 @@
       <h1 class="hero-title">Scalable PM<sub>2.5</sub> Monitoring<br/>via Satellite-Augmented AI</h1>
       <p class="hero-subtitle">A dual-regime XGBoost framework fusing INSAT-3DS aerosol retrievals with ERA5 meteorological reanalysis across nine Indian cities — making continuous air quality monitoring economically feasible at national scale.</p>
       <div class="hero-meta">
-        <span>August 2025 – March 2026</span>
-        <span class="sep">·</span>
-        <span>Nine Indian Cities</span>
-        <span class="sep">·</span>
-        <span>640,000+ records</span>
+        <span class="pill">August 2025 – March 2026</span>
+        <span class="pill">Nine Indian Cities</span>
+        <span class="pill">640,000+ records</span>
       </div>
       <div class="hero-stats">
         <div class="stat">
+          <div class="stat-indicator"></div>
           <span class="stat-value">R² = 0.92</span>
           <span class="stat-label">Operational Model</span>
         </div>
-        <div class="stat-divider"></div>
         <div class="stat">
+          <div class="stat-indicator"></div>
           <span class="stat-value">R² = 0.61</span>
           <span class="stat-label">Physical Baseline</span>
         </div>
-        <div class="stat-divider"></div>
         <div class="stat">
+          <div class="stat-indicator"></div>
           <span class="stat-value">85–90%</span>
           <span class="stat-label">Cost Reduction</span>
         </div>
-        <div class="stat-divider"></div>
         <div class="stat">
+          <div class="stat-indicator"></div>
           <span class="stat-value">4,000+</span>
           <span class="stat-label">Target Cities</span>
         </div>
@@ -115,31 +117,24 @@
 
         <div class="pipeline">
           <div class="pipeline-step">
-            <div class="pipeline-icon">01</div>
             <div class="pipeline-content">
               <h3>INSAT-3DS Satellite AOD</h3>
               <p>Level-2 Gridded AOD (V02R00) in HDF5 format retrieved from MOSDAC via a Selenium browser automation pipeline. 1,505 granules acquired over the study period. Available only during clear-sky daytime windows (11:15–14:15 IST), resulting in 93% temporal sparsity.</p>
             </div>
           </div>
-          <div class="pipeline-connector">↓</div>
           <div class="pipeline-step">
-            <div class="pipeline-icon">02</div>
             <div class="pipeline-content">
               <h3>ERA5 Meteorological Reanalysis</h3>
               <p>0.25°×0.25° resolution fields from ECMWF covering Boundary Layer Height (BLH), temperature, dewpoint, surface pressure, and wind speed. ERA5 provides continuous all-weather coverage, filling temporal gaps when satellite AOD is unavailable.</p>
             </div>
           </div>
-          <div class="pipeline-connector">↓</div>
           <div class="pipeline-step">
-            <div class="pipeline-icon">03</div>
             <div class="pipeline-content">
               <h3>CPCB Ground Observations</h3>
               <p>Hourly PM<sub>2.5</sub> from Continuous Ambient Air Quality Monitoring Stations within each city. Quality-controlled with hard filters (0–1,000 µg/m³) and city-balanced at 42,426 records per city to prevent model bias toward data-rich regions like Delhi.</p>
             </div>
           </div>
-          <div class="pipeline-connector">↓</div>
           <div class="pipeline-step">
-            <div class="pipeline-icon">04</div>
             <div class="pipeline-content">
               <h3>XGBoost with Optuna Hyperparameter Optimization</h3>
               <p>GPU-accelerated gradient boosting (tree_method='hist', device='cuda') with hyperparameters tuned by Optuna to minimize RMSE. Two configurations evaluated: Model B with temporal lag (pm25_lag1) for operational forecasting, and Model B-NoLag isolating physical signal from satellite and meteorology alone.</p>
