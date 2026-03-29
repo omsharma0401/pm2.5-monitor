@@ -1,235 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Satellite-Augmented AI for PM2.5 Monitoring in India</title>
-  <meta name="description" content="A dual-regime machine learning framework using INSAT-3DS satellite AOD and ERA5 meteorology to estimate PM2.5 across nine Indian cities." />
+  <meta name="description"
+    content="A dual-regime machine learning framework using INSAT-3DS satellite AOD and ERA5 meteorology to estimate PM2.5 across nine Indian cities." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+
+  <!-- Canvas background -->
+  <canvas id="bg-canvas"></canvas>
 
   <!-- Navigation -->
   <nav id="nav">
     <div class="nav-inner">
-      <div class="nav-brand">
-        <div class="nav-dot"></div>
-        <span class="nav-label">Research</span>
-      </div>
+      <a href="#hero" class="nav-brand">
+        <div class="nav-logo">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <circle cx="9" cy="9" r="3" fill="var(--teal)" />
+            <circle cx="9" cy="9" r="6.5" stroke="var(--teal)" stroke-width="1" stroke-dasharray="3 2" />
+            <circle cx="9" cy="9" r="9" stroke="var(--teal)" stroke-width="0.5" opacity="0.4" />
+          </svg>
+        </div>
+        <span class="nav-title">PM<sub>2.5</sub> AI</span>
+      </a>
       <ul class="nav-links">
         <li><a href="#abstract">Abstract</a></li>
         <li><a href="#problem">Problem</a></li>
-        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#methodology">Method</a></li>
         <li><a href="#results">Results</a></li>
-        <li><a href="#implications">Implications</a></li>
+        <li><a href="#implications">Impact</a></li>
         <li><a href="#data-sources">Data &amp; Code</a></li>
       </ul>
+      <a href="mini_proj (1).pdf" class="nav-cta" target="_blank">Read Paper ↗</a>
     </div>
   </nav>
 
   <!-- Hero -->
   <header id="hero">
+    <div class="hero-texture"></div>
     <div class="hero-inner">
-      <p class="hero-kicker">Environmental Informatics · Machine Learning · Remote Sensing</p>
-      <h1 class="hero-title">Scalable PM<sub>2.5</sub> Monitoring<br/>via Satellite-Augmented AI</h1>
-      <p class="hero-subtitle">A dual-regime XGBoost framework fusing INSAT-3DS aerosol retrievals with ERA5 meteorological reanalysis across nine Indian cities — making continuous air quality monitoring economically feasible at national scale.</p>
-      <div class="hero-meta">
-        <span class="pill">August 2025 – March 2026</span>
-        <span class="pill">Nine Indian Cities</span>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Environmental Informatics · Machine Learning · Remote Sensing
+      </div>
+
+      <h1 class="hero-title">
+        Scalable <em>PM<sub>2.5</sub></em><br />Monitoring via<br />
+        <span class="gradient-text">Satellite-Augmented AI</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        A dual-regime XGBoost framework fusing <strong>INSAT-3DS</strong> geostationary aerosol retrievals
+        with <strong>ERA5</strong> meteorological reanalysis across nine Indian cities —
+        making continuous air quality monitoring economically feasible at national scale.
+      </p>
+
+      <div class="hero-pills">
+        <span class="pill">Aug 2025 – Mar 2026</span>
+        <span class="pill">9 Indian Cities</span>
         <span class="pill">640,000+ records</span>
+        <span class="pill">XGBoost + Optuna</span>
       </div>
+
       <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-indicator"></div>
-          <span class="stat-value">R² = 0.92</span>
-          <span class="stat-label">Operational Model</span>
+        <div class="hero-stat">
+          <div class="hero-stat-bar">
+            <div class="hero-stat-fill teal" style="--pct: 92.59%"></div>
+          </div>
+          <div class="hero-stat-val" data-target="0.9259" data-prefix="R² = ">R² = 0.00</div>
+          <div class="hero-stat-lbl">Operational Model</div>
         </div>
-        <div class="stat">
-          <div class="stat-indicator"></div>
-          <span class="stat-value">R² = 0.61</span>
-          <span class="stat-label">Physical Baseline</span>
+        <div class="hero-stat">
+          <div class="hero-stat-bar">
+            <div class="hero-stat-fill gold" style="--pct: 61.48%"></div>
+          </div>
+          <div class="hero-stat-val" data-target="0.6148" data-prefix="R² = ">R² = 0.00</div>
+          <div class="hero-stat-lbl">Physical Baseline</div>
         </div>
-        <div class="stat">
-          <div class="stat-indicator"></div>
-          <span class="stat-value">85–90%</span>
-          <span class="stat-label">Cost Reduction</span>
+        <div class="hero-stat">
+          <div class="hero-stat-bar">
+            <div class="hero-stat-fill blue" style="--pct: 88%"></div>
+          </div>
+          <div class="hero-stat-val" data-target="88" data-suffix="%" data-prefix="">0%</div>
+          <div class="hero-stat-lbl">Cost Reduction</div>
         </div>
-        <div class="stat">
-          <div class="stat-indicator"></div>
-          <span class="stat-value">4,000+</span>
-          <span class="stat-label">Target Cities</span>
+        <div class="hero-stat">
+          <div class="hero-stat-bar">
+            <div class="hero-stat-fill purple" style="--pct: 100%"></div>
+          </div>
+          <div class="hero-stat-val" data-target="4000" data-suffix="+" data-prefix="">0+</div>
+          <div class="hero-stat-lbl">Target Cities</div>
         </div>
       </div>
+
+      <div class="hero-scroll-hint">
+        <div class="scroll-line"></div>
+        <span>Scroll to explore</span>
+      </div>
+    </div>
+
+    <!-- Floating city labels -->
+    <div class="city-map">
+      <span class="city-node" style="top:28%; left:38%" data-city="Delhi">Delhi</span>
+      <span class="city-node" style="top:46%; left:40%" data-city="Mumbai">Mumbai</span>
+      <span class="city-node" style="top:46%; left:60%" data-city="Kolkata">Kolkata</span>
+      <span class="city-node" style="top:67%; left:40%" data-city="Bengaluru">Bengaluru</span>
+      <span class="city-node" style="top:58%; left:50%" data-city="Hyderabad">Hyderabad</span>
+      <span class="city-node" style="top:40%; left:52%" data-city="Bhubaneswar">Bhubaneswar</span>
+      <span class="city-node" style="top:34%; left:44%" data-city="Lucknow">Lucknow</span>
+      <span class="city-node" style="top:52%; left:46%" data-city="Nagpur">Nagpur</span>
+      <span class="city-node" style="top:75%; left:36%" data-city="Thiruvananthapuram">TVM</span>
     </div>
   </header>
 
   <main>
 
     <!-- Abstract -->
-    <section id="abstract" class="section">
+    <section id="abstract" class="section reveal">
       <div class="container">
-        <div class="section-label">Abstract</div>
-        <div class="abstract-text">
-          <p>India's air quality crisis — responsible for over 1.67 million premature deaths annually — is exacerbated by a monitoring infrastructure concentrated in Tier-1 cities, leaving 70–90% data gaps in smaller urban centers. This study presents a dual-regime machine learning framework that fuses INSAT-3DS geostationary satellite Aerosol Optical Depth (AOD) with ERA5 meteorological reanalysis and CPCB ground observations to estimate hourly PM<sub>2.5</sub> concentrations across nine Indian cities.</p>
-          <p>Two distinct models are evaluated: a <em>mechanistic baseline</em> relying on physical drivers (AOD, meteorology, temporal cycles) that achieves R² = 0.61, and an <em>operational forecasting model</em> incorporating temporal inertia that achieves R² = 0.92 (RMSE: 18.5 µg/m³). The framework reduces monitoring costs by 85–90% compared to ground networks and proposes a tiered deployment strategy for India's 4,000+ urban centers.</p>
+        <div class="section-tag">01 / Abstract</div>
+        <div class="abstract-layout">
+          <h2 class="section-heading">The Study</h2>
+          <div class="abstract-body">
+            <p>India's air quality crisis is responsible for over <strong class="highlight">1.67 million premature
+                deaths</strong> annually — yet monitoring infrastructure is concentrated in Tier-1 cities, leaving
+              70–90% data gaps in smaller urban centers.</p>
+            <p>This study presents a dual-regime machine learning framework that fuses <strong
+                class="highlight-teal">INSAT-3DS geostationary satellite AOD</strong> with <strong
+                class="highlight-teal">ERA5 meteorological reanalysis</strong> and CPCB ground observations to estimate
+              hourly PM<sub>2.5</sub> concentrations across nine Indian cities.</p>
+            <p>By honestly distinguishing between <em>mechanistic modelling</em> (physical drivers only, R² = 0.61) and
+              <em>operational forecasting</em> (including temporal inertia, R² = 0.92), the framework enables
+              appropriate model selection for distinct policy contexts — while reducing monitoring costs by 85–90% vs.
+              ground networks.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- The Problem -->
-    <section id="problem" class="section section-alt">
+    <!-- Problem -->
+    <section id="problem" class="section section-dark reveal">
       <div class="container">
-        <div class="section-label">The Problem</div>
-        <h2 class="section-title">A Monitoring Infrastructure Gap</h2>
-        <div class="two-col">
-          <div class="col-text">
-            <p>India's Continuous Ambient Air Quality Monitoring Stations (CAAQMS) cost approximately <strong>₹50 lakh</strong> to install and <strong>₹10–15 lakh annually</strong> to maintain — a prohibitive expense that leaves most of the country without reliable data. A nation-wide ground network comparable to Tier-1 standards would require an estimated <strong>₹2,600 crore</strong> in initial investment alone.</p>
-            <p>Existing ground stations typically exhibit 60–75% uptime, creating blind spots during critical pollution episodes. Tier-2 and Tier-3 cities experience 70–90% data gaps due to power interruptions, calibration drift, and vandalism.</p>
-            <p>Furthermore, point-source ground measurements fail to capture spatial heterogeneity across large urban agglomerations — a gap that satellite coverage can uniquely fill.</p>
+        <div class="section-tag">02 / Problem</div>
+        <h2 class="section-heading">A Broken<br />Monitoring System</h2>
+
+        <div class="problem-grid">
+          <div class="problem-card glow-teal">
+            <div class="problem-card-icon">₹</div>
+            <div class="problem-card-num">50L</div>
+            <div class="problem-card-label">Cost to install one CAAQMS station</div>
+            <div class="problem-card-sub">+ ₹10–15L annual maintenance</div>
           </div>
-          <div class="col-facts">
-            <div class="fact-card">
-              <div class="fact-number">1.67M</div>
-              <div class="fact-desc">Premature deaths annually attributed to air pollution in India</div>
-            </div>
-            <div class="fact-card">
-              <div class="fact-number">70–90%</div>
-              <div class="fact-desc">Data gaps in Tier-2 and Tier-3 city monitoring stations</div>
-            </div>
-            <div class="fact-card">
-              <div class="fact-number">₹2,600 Cr</div>
-              <div class="fact-desc">Estimated cost of a national-scale ground monitoring network</div>
-            </div>
+          <div class="problem-card glow-gold">
+            <div class="problem-card-icon">⚠</div>
+            <div class="problem-card-num">70–90%</div>
+            <div class="problem-card-label">Data gaps in Tier-2 & Tier-3 cities</div>
+            <div class="problem-card-sub">Power failures, calibration drift, vandalism</div>
           </div>
+          <div class="problem-card glow-blue">
+            <div class="problem-card-icon">🏙</div>
+            <div class="problem-card-num">₹2,600 Cr</div>
+            <div class="problem-card-label">Estimated cost of national ground network</div>
+            <div class="problem-card-sub">Excluding recurring maintenance</div>
+          </div>
+          <div class="problem-card glow-teal">
+            <div class="problem-card-icon">💀</div>
+            <div class="problem-card-num">1.67M</div>
+            <div class="problem-card-label">Annual premature deaths from air pollution</div>
+            <div class="problem-card-sub">Global Burden of Disease Study 2019</div>
+          </div>
+        </div>
+
+        <div class="problem-statement">
+          <div class="ps-line"></div>
+          <p>Ground stations provide only <strong>point-source measurements</strong> and exhibit 60–75% uptime —
+            creating dangerous blind spots during critical pollution episodes. There is a critical need for a low-cost,
+            <em>continuous</em> monitoring framework deployable in resource-constrained environments.
+          </p>
         </div>
       </div>
     </section>
 
     <!-- Methodology -->
-    <section id="methodology" class="section">
+    <section id="methodology" class="section reveal">
       <div class="container">
-        <div class="section-label">Methodology</div>
-        <h2 class="section-title">A Dual-Regime Framework</h2>
-        <p class="section-intro">Three data streams are fused at hourly resolution across nine cities spanning India's diverse climatic zones — monsoon coast, arid inland, and humid subtropical.</p>
+        <div class="section-tag">03 / Methodology</div>
+        <h2 class="section-heading">Dual-Regime<br />Framework</h2>
 
-        <div class="pipeline">
-          <div class="pipeline-step">
-            <div class="pipeline-content">
-              <h3>INSAT-3DS Satellite AOD</h3>
-              <p>Level-2 Gridded AOD (V02R00) in HDF5 format retrieved from MOSDAC via a Selenium browser automation pipeline. 1,505 granules acquired over the study period. Available only during clear-sky daytime windows (11:15–14:15 IST), resulting in 93% temporal sparsity.</p>
+        <div class="method-grid">
+          <div class="method-pipeline">
+            <div class="pipe-step active">
+              <div class="pipe-num">01</div>
+              <div class="pipe-info">
+                <h3>INSAT-3DS Satellite AOD</h3>
+                <p>Level-2 Gridded AOD (V02R00) in HDF5 format from <a href="https://mosdac.gov.in" target="_blank"
+                    class="inline-link">MOSDAC ↗</a>. 1,505 granules retrieved via Selenium automation. Clear-sky only:
+                  11:15–14:15 IST → <strong>93% temporal sparsity.</strong></p>
+                <div class="pipe-tag">Satellite · ISRO · Geostationary</div>
+              </div>
+            </div>
+            <div class="pipe-connector"></div>
+            <div class="pipe-step">
+              <div class="pipe-num">02</div>
+              <div class="pipe-info">
+                <h3>ERA5 Meteorological Reanalysis</h3>
+                <p>0.25°×0.25° fields from <a href="https://cds.climate.copernicus.eu" target="_blank"
+                    class="inline-link">ECMWF ↗</a>: Boundary Layer Height, temperature, dewpoint, surface pressure,
+                  wind speed. Provides all-weather continuous coverage.</p>
+                <div class="pipe-tag">Reanalysis · ECMWF · All-weather</div>
+              </div>
+            </div>
+            <div class="pipe-connector"></div>
+            <div class="pipe-step">
+              <div class="pipe-num">03</div>
+              <div class="pipe-info">
+                <h3>CPCB Ground Truth</h3>
+                <p>Hourly PM<sub>2.5</sub> from CAAQMS stations, quality-controlled (0–1,000 µg/m³),
+                  <strong>city-balanced at 42,426 records/city</strong> to prevent model bias toward data-rich Delhi
+                  (which had 28× more records than Thiruvananthapuram).
+                </p>
+                <div class="pipe-tag">Ground · CPCB · Hourly</div>
+              </div>
+            </div>
+            <div class="pipe-connector"></div>
+            <div class="pipe-step">
+              <div class="pipe-num">04</div>
+              <div class="pipe-info">
+                <h3>XGBoost + Optuna</h3>
+                <p>GPU-accelerated gradient boosting (CUDA). Hyperparameters tuned by Optuna to minimize RMSE. Handles
+                  missing AOD <em>natively</em> via default split learning — no imputation required.</p>
+                <div class="pipe-tag">ML · GPU · Bayesian Optimization</div>
+              </div>
             </div>
           </div>
-          <div class="pipeline-step">
-            <div class="pipeline-content">
-              <h3>ERA5 Meteorological Reanalysis</h3>
-              <p>0.25°×0.25° resolution fields from ECMWF covering Boundary Layer Height (BLH), temperature, dewpoint, surface pressure, and wind speed. ERA5 provides continuous all-weather coverage, filling temporal gaps when satellite AOD is unavailable.</p>
-            </div>
-          </div>
-          <div class="pipeline-step">
-            <div class="pipeline-content">
-              <h3>CPCB Ground Observations</h3>
-              <p>Hourly PM<sub>2.5</sub> from Continuous Ambient Air Quality Monitoring Stations within each city. Quality-controlled with hard filters (0–1,000 µg/m³) and city-balanced at 42,426 records per city to prevent model bias toward data-rich regions like Delhi.</p>
-            </div>
-          </div>
-          <div class="pipeline-step">
-            <div class="pipeline-content">
-              <h3>XGBoost with Optuna Hyperparameter Optimization</h3>
-              <p>GPU-accelerated gradient boosting (tree_method='hist', device='cuda') with hyperparameters tuned by Optuna to minimize RMSE. Two configurations evaluated: Model B with temporal lag (pm25_lag1) for operational forecasting, and Model B-NoLag isolating physical signal from satellite and meteorology alone.</p>
-            </div>
-          </div>
-        </div>
 
-        <div class="feature-grid">
-          <h3 class="subsection-title">Key Engineered Features</h3>
-          <div class="features">
-            <div class="feature-tag">AOD (INSAT-3DS)</div>
-            <div class="feature-tag">Boundary Layer Height</div>
-            <div class="feature-tag">Relative Humidity</div>
-            <div class="feature-tag">RH × AOD Interaction</div>
-            <div class="feature-tag">Wind Speed</div>
-            <div class="feature-tag">Surface Pressure</div>
-            <div class="feature-tag">month_sin / month_cos</div>
-            <div class="feature-tag">hour_sin / hour_cos</div>
-            <div class="feature-tag">pm25_lag1 (Model B only)</div>
-            <div class="feature-tag">Lat / Lon</div>
+          <div class="method-features">
+            <h3 class="feats-title">Engineered Features</h3>
+            <div class="feat-list">
+              <div class="feat-item feat-key"><span class="feat-dot teal"></span>AOD (INSAT-3DS)</div>
+              <div class="feat-item feat-key"><span class="feat-dot teal"></span>RH × AOD Interaction</div>
+              <div class="feat-item"><span class="feat-dot gold"></span>Boundary Layer Height</div>
+              <div class="feat-item"><span class="feat-dot gold"></span>Relative Humidity</div>
+              <div class="feat-item"><span class="feat-dot gold"></span>Wind Speed</div>
+              <div class="feat-item"><span class="feat-dot gold"></span>Surface Pressure</div>
+              <div class="feat-item"><span class="feat-dot blue"></span>month_sin / month_cos</div>
+              <div class="feat-item"><span class="feat-dot blue"></span>hour_sin / hour_cos</div>
+              <div class="feat-item feat-key"><span class="feat-dot purple"></span>pm25_lag1 (Model B only)</div>
+              <div class="feat-item"><span class="feat-dot muted"></span>Lat / Lon</div>
+            </div>
+            <div class="feats-note">
+              <span class="mono">Every 5th week</span> held out as test set — chronological ordering preserved to
+              prevent look-ahead bias.
+            </div>
           </div>
-        </div>
-
-        <div class="validation-note">
-          <strong>Validation Strategy:</strong> Every 5th calendar week is held out as a test set, preserving chronological order to prevent look-ahead bias — ensuring evaluation conditions reflect real-world forecasting constraints.
         </div>
       </div>
     </section>
 
     <!-- Results -->
-    <section id="results" class="section section-alt">
+    <section id="results" class="section section-dark reveal">
       <div class="container">
-        <div class="section-label">Results</div>
-        <h2 class="section-title">Two Models, Two Purposes</h2>
+        <div class="section-tag">04 / Results</div>
+        <h2 class="section-heading">Two Models,<br />Two Purposes</h2>
 
-        <div class="models-compare">
-          <div class="model-card">
-            <div class="model-badge operational">Operational</div>
-            <div class="model-name">Model B — With Temporal Lag</div>
-            <div class="model-metric-row">
-              <div class="model-metric">
-                <span class="model-metric-val">0.9259</span>
-                <span class="model-metric-lbl">R² (Test Set)</span>
+        <div class="results-cards">
+          <div class="result-card operational">
+            <div class="rc-glow"></div>
+            <div class="rc-badge">Operational</div>
+            <div class="rc-name">Model B — With Temporal Lag</div>
+            <div class="rc-metrics">
+              <div class="rc-metric">
+                <div class="rc-val" data-target="0.9259" data-prefix="R² ">R² 0.00</div>
+                <div class="rc-unit">Test Set</div>
               </div>
-              <div class="model-metric">
-                <span class="model-metric-val">18.47</span>
-                <span class="model-metric-lbl">RMSE (µg/m³)</span>
+              <div class="rc-divider"></div>
+              <div class="rc-metric">
+                <div class="rc-val" data-target="18.47" data-suffix=" µg/m³">0 µg/m³</div>
+                <div class="rc-unit">RMSE</div>
               </div>
             </div>
-            <p class="model-desc">Incorporates the previous hour's PM<sub>2.5</sub> measurement (pm25_lag1) to capture temporal inertia — the dominant signal in pollution time series. Best for hourly operational forecasting and public health alert systems.</p>
-            <div class="model-caveat">SHAP analysis confirms pm25_lag1 contributes ~10× more than all other features combined (mean |SHAP| = 49.23). The model learns statistical persistence, not causal atmospheric physics.</div>
+            <div class="rc-bar-wrap">
+              <div class="rc-bar-label">Accuracy vs. perfect (100%)</div>
+              <div class="rc-bar">
+                <div class="rc-bar-fill" style="--w: 92.59%"></div>
+              </div>
+              <div class="rc-bar-pct">92.59%</div>
+            </div>
+            <p class="rc-desc">Incorporates pm25_lag1 (previous hour) to capture temporal inertia — the dominant signal
+              in pollution time series. Ideal for hourly forecasting and public health alert systems.</p>
+            <div class="rc-insight">
+              <span class="insight-icon">⚡</span>
+              SHAP: pm25_lag1 (mean |SHAP| = 49.23) contributes <strong>~10× more</strong> than all other features
+              combined. The model learns statistical persistence, not atmospheric physics.
+            </div>
           </div>
 
-          <div class="model-card">
-            <div class="model-badge physical">Physical Baseline</div>
-            <div class="model-name">Model B-NoLag — Physical Drivers Only</div>
-            <div class="model-metric-row">
-              <div class="model-metric">
-                <span class="model-metric-val">0.6148</span>
-                <span class="model-metric-lbl">R² (Test Set)</span>
+          <div class="result-card physical">
+            <div class="rc-glow"></div>
+            <div class="rc-badge">Physical Baseline</div>
+            <div class="rc-name">Model B-NoLag — Physical Drivers Only</div>
+            <div class="rc-metrics">
+              <div class="rc-metric">
+                <div class="rc-val" data-target="0.6148" data-prefix="R² ">R² 0.00</div>
+                <div class="rc-unit">Test Set</div>
               </div>
-              <div class="model-metric">
-                <span class="model-metric-val">51.11</span>
-                <span class="model-metric-lbl">RMSE (µg/m³)</span>
+              <div class="rc-divider"></div>
+              <div class="rc-metric">
+                <div class="rc-val" data-target="51.11" data-suffix=" µg/m³">0 µg/m³</div>
+                <div class="rc-unit">RMSE</div>
               </div>
             </div>
-            <p class="model-desc">Excludes historical observations — relying solely on satellite AOD and ERA5 meteorology. This configuration is deployable in cities with no existing ground infrastructure and remains interpretable for policy analysis.</p>
-            <div class="model-caveat">Relative Humidity is the dominant feature (Gain: 1,528,782) due to hygroscopic aerosol growth effects. AOD ranks 9th due to 93% temporal sparsity, but provides a meaningful +0.13 R² improvement during clear-sky windows.</div>
+            <div class="rc-bar-wrap">
+              <div class="rc-bar-label">Accuracy vs. perfect (100%)</div>
+              <div class="rc-bar">
+                <div class="rc-bar-fill" style="--w: 61.48%"></div>
+              </div>
+              <div class="rc-bar-pct">61.48%</div>
+            </div>
+            <p class="rc-desc">Relies solely on satellite AOD and ERA5 meteorology. Deployable in cities with <em>zero
+                ground infrastructure</em>. Interpretable for policy analysis and mechanistic understanding.</p>
+            <div class="rc-insight">
+              <span class="insight-icon">🛰</span>
+              AOD provides a <strong>+0.13 R² improvement</strong> during the ~7% of hours when clear-sky retrieval is
+              available — an honest, measurable signal despite 93% sparsity.
+            </div>
           </div>
         </div>
 
-        <div class="findings-grid">
-          <h3 class="subsection-title">Key Findings</h3>
-          <div class="finding">
-            <div class="finding-icon">◈</div>
-            <div class="finding-text">
-              <strong>Regional heterogeneity:</strong> Coastal cities (Thiruvananthapuram, Kolkata) exhibit 3× higher AOD sensitivity (~0.31) compared to inland cities, reflecting marine aerosol dynamics and sea-breeze patterns. Inland cities (Delhi, Lucknow, Nagpur) are dominated by Boundary Layer Height (~0.24–0.31), consistent with winter inversion trapping.
+        <!-- Key Findings -->
+        <div class="findings">
+          <h3 class="findings-title">Key Findings</h3>
+          <div class="findings-list">
+            <div class="finding-item reveal-child">
+              <div class="fi-index">01</div>
+              <div class="fi-content">
+                <strong>Coastal vs. Inland</strong>
+                Coastal cities (Thiruvananthapuram, Kolkata) show <strong>3× higher AOD sensitivity (~0.31)</strong> due
+                to marine aerosol and sea-breeze dynamics. Inland cities (Delhi, Lucknow, Nagpur) are dominated by
+                Boundary Layer Height (BLH ~0.24–0.31), consistent with winter inversion trapping.
+              </div>
             </div>
-          </div>
-          <div class="finding">
-            <div class="finding-icon">◈</div>
-            <div class="finding-text">
-              <strong>Seasonal modulation:</strong> Winter PM<sub>2.5</sub> concentrations are 2–3× higher than monsoon levels. Northern inland cities (Delhi, Lucknow) show median winter concentrations of 85–120 µg/m³ vs. 25–45 µg/m³ during monsoon — validating the need for winter-specific interventions like GRAP.
+            <div class="finding-item reveal-child">
+              <div class="fi-index">02</div>
+              <div class="fi-content">
+                <strong>Winter vs. Monsoon</strong>
+                Winter PM<sub>2.5</sub> is <strong>2–3× higher</strong> than monsoon levels. Delhi and Lucknow show
+                median winter concentrations of 85–120 µg/m³ vs. 25–45 µg/m³ during monsoon — validating the urgency for
+                winter-specific GRAP interventions.
+              </div>
             </div>
-          </div>
-          <div class="finding">
-            <div class="finding-icon">◈</div>
-            <div class="finding-text">
-              <strong>AOD-PM<sub>2.5</sub> correlation:</strong> Pearson r = 0.58 (p &lt; 0.001) across 48,999 clear-sky observations, confirming physical utility. The relationship weakens at RH &gt; 70% due to hygroscopic aerosol growth, justifying the RH × AOD interaction feature. Non-linearity in the relationship justifies gradient boosting over linear regression.
+            <div class="finding-item reveal-child">
+              <div class="fi-index">03</div>
+              <div class="fi-content">
+                <strong>AOD–PM<sub>2.5</sub> Correlation</strong>
+                Pearson r = 0.58 (p &lt; 0.001) across 48,999 clear-sky observations. Correlation <em>weakens</em> at RH
+                &gt; 70% due to hygroscopic aerosol growth — justifying the RH × AOD interaction feature in the model.
+              </div>
             </div>
-          </div>
-          <div class="finding">
-            <div class="finding-icon">◈</div>
-            <div class="finding-text">
-              <strong>Temporal validation:</strong> End-to-end time-series cross-validation with per-station 80/20 chronological splits yields holdout R² = 0.8543 for Model B, confirming generalization to unseen future periods without look-ahead bias.
+            <div class="finding-item reveal-child">
+              <div class="fi-index">04</div>
+              <div class="fi-content">
+                <strong>Generalization</strong>
+                Time-series cross-validation with per-station 80/20 chronological splits yields holdout R² = 0.8543,
+                confirming generalization to unseen future periods without look-ahead bias.
+              </div>
             </div>
           </div>
         </div>
@@ -237,142 +382,184 @@
     </section>
 
     <!-- Implications -->
-    <section id="implications" class="section">
+    <section id="implications" class="section reveal">
       <div class="container">
-        <div class="section-label">Implications</div>
-        <h2 class="section-title">A Tiered Monitoring Strategy</h2>
-        <p class="section-intro">Rather than replacing ground infrastructure, this framework proposes a pragmatic, cost-graduated deployment matching monitoring modality to city capacity.</p>
+        <div class="section-tag">05 / Implications</div>
+        <h2 class="section-heading">A Tiered Strategy<br />for 4,000+ Cities</h2>
 
         <div class="tiers">
-          <div class="tier">
-            <div class="tier-label">Tier 1</div>
+          <div class="tier-card">
+            <div class="tier-index">Tier 1</div>
             <div class="tier-cities">Delhi · Mumbai · Kolkata</div>
-            <div class="tier-approach">Maintain CAAQMS + augment with satellite AI for spatial gap-filling</div>
-            <div class="tier-outcome">High-fidelity coverage with redundancy; satellite fills station downtime</div>
+            <div class="tier-approach">Maintain CAAQMS + satellite AI for spatial gap-filling</div>
+            <div class="tier-outcome">High-fidelity coverage with redundancy</div>
+            <div class="tier-bar">
+              <div class="tier-bar-fill" style="--w: 100%"></div>
+            </div>
           </div>
-          <div class="tier">
-            <div class="tier-label">Tier 2</div>
+          <div class="tier-card featured">
+            <div class="tier-badge">Primary Target</div>
+            <div class="tier-index">Tier 2</div>
             <div class="tier-cities">Bhubaneswar · Lucknow · Nagpur</div>
             <div class="tier-approach">Satellite AI as primary; selective ground sensors in high-risk zones</div>
-            <div class="tier-outcome">85–90% cost reduction vs. full ground network; continuous baseline coverage</div>
+            <div class="tier-outcome"><strong>85–90% cost reduction</strong> vs. full ground network</div>
+            <div class="tier-bar">
+              <div class="tier-bar-fill" style="--w: 87%"></div>
+            </div>
           </div>
-          <div class="tier">
-            <div class="tier-label">Tier 3</div>
+          <div class="tier-card">
+            <div class="tier-index">Tier 3</div>
             <div class="tier-cities">4,000+ smaller cities</div>
-            <div class="tier-approach">Satellite AI only with periodic ground calibration campaigns</div>
-            <div class="tier-outcome">Economically feasible monitoring where ground infrastructure is prohibitive</div>
+            <div class="tier-approach">Satellite AI only + periodic ground calibration campaigns</div>
+            <div class="tier-outcome">Economically feasible where ground infrastructure is prohibitive</div>
+            <div class="tier-bar">
+              <div class="tier-bar-fill" style="--w: 60%"></div>
+            </div>
           </div>
         </div>
 
-        <div class="future-work">
-          <h3 class="subsection-title">Future Directions</h3>
-          <ul class="future-list">
-            <li><strong>All-weather AOD retrieval:</strong> Integrate microwave sensors or ML-based cloud correction to reduce the 93% temporal sparsity of optical AOD.</li>
-            <li><strong>City-specific adaptation:</strong> Develop hierarchical or meta-learning frameworks enabling rapid deployment to new cities with minimal ground calibration.</li>
-            <li><strong>Real-time deployment pipeline:</strong> Build automated ingestion → prediction → alert systems integrated with emission inventories for source attribution and GRAP interventions.</li>
-          </ul>
+        <div class="future-grid">
+          <div class="future-card">
+            <h3>All-Weather AOD</h3>
+            <p>Integrate microwave sensors or ML-based cloud correction to reduce 93% temporal sparsity of optical AOD.
+            </p>
+          </div>
+          <div class="future-card">
+            <div class="future-icon">🧠</div>
+            <h3>City-Specific Adaptation</h3>
+            <p>Hierarchical or meta-learning frameworks enabling rapid deployment to new cities with minimal ground
+              calibration.</p>
+          </div>
+          <div class="future-card">
+            <div class="future-icon">⚡</div>
+            <h3>Real-Time Pipeline</h3>
+            <p>Automated ingestion → prediction → alert systems integrated with emission inventories for GRAP
+              interventions.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Data Sources & Links -->
-    <section id="data-sources" class="section section-alt">
+    <!-- Data Sources -->
+    <section id="data-sources" class="section section-dark reveal">
       <div class="container">
-        <div class="section-label">Data &amp; Resources</div>
-        <h2 class="section-title">Data Sources &amp; External Links</h2>
-        <p class="section-intro">All code and the compiled dataset are publicly available to ensure reproducibility. The following sources were used in this study.</p>
+        <div class="section-tag">06 / Data &amp; Code</div>
+        <h2 class="section-heading">Data Sources &amp;<br />External Links</h2>
+        <p class="section-sub">All code and compiled datasets are publicly available to ensure reproducibility.</p>
 
         <div class="links-grid">
-
-          <a href="https://mosdac.gov.in" target="_blank" rel="noopener noreferrer" class="link-card" id="link-mosdac">
-            <div class="link-card-header">
-              <span class="link-card-title">MOSDAC — INSAT-3DS AOD</span>
-              <span class="link-arrow">↗</span>
+          <a href="https://mosdac.gov.in" target="_blank" rel="noopener" class="link-card" id="link-mosdac">
+            <div class="lc-top">
+              <span class="lc-category">Satellite Data</span>
+              <span class="lc-arrow">↗</span>
             </div>
-            <p class="link-card-desc">ISRO's Meteorological & Oceanographic Satellite Data Archival Centre. Source of the INSAT-3DS Level-2 Gridded Aerosol Optical Depth (V02R00) product used in this study. 1,505 HDF5 granules retrieved via Selenium automation.</p>
-            <span class="link-url">mosdac.gov.in</span>
+            <div class="lc-title">MOSDAC — INSAT-3DS AOD</div>
+            <p class="lc-desc">ISRO's data archival centre. Source of Level-2 Gridded AOD (V02R00). 1,505 HDF5 granules
+              retrieved via Selenium automation pipeline.</p>
+            <div class="lc-url">mosdac.gov.in</div>
           </a>
 
-          <a href="https://cds.climate.copernicus.eu" target="_blank" rel="noopener noreferrer" class="link-card" id="link-era5">
-            <div class="link-card-header">
-              <span class="link-card-title">ERA5 — ECMWF Climate Data Store</span>
-              <span class="link-arrow">↗</span>
+          <a href="https://cds.climate.copernicus.eu" target="_blank" rel="noopener" class="link-card" id="link-era5">
+            <div class="lc-top">
+              <span class="lc-category">Meteorological</span>
+              <span class="lc-arrow">↗</span>
             </div>
-            <p class="link-card-desc">European Centre for Medium-Range Weather Forecasts reanalysis dataset at 0.25°×0.25° resolution. Boundary Layer Height, temperature, humidity, wind, and surface pressure fields used as model inputs.</p>
-            <span class="link-url">cds.climate.copernicus.eu</span>
+            <div class="lc-title">ERA5 — ECMWF Climate Data Store</div>
+            <p class="lc-desc">0.25°×0.25° reanalysis: Boundary Layer Height, temperature, humidity, wind, surface
+              pressure — all-weather continuous coverage.</p>
+            <div class="lc-url">cds.climate.copernicus.eu</div>
           </a>
 
-          <a href="https://cpcb.nic.in" target="_blank" rel="noopener noreferrer" class="link-card" id="link-cpcb">
-            <div class="link-card-header">
-              <span class="link-card-title">CPCB — India Air Quality Data</span>
-              <span class="link-arrow">↗</span>
+          <a href="https://cpcb.nic.in" target="_blank" rel="noopener" class="link-card" id="link-cpcb">
+            <div class="lc-top">
+              <span class="lc-category">Ground Truth</span>
+              <span class="lc-arrow">↗</span>
             </div>
-            <p class="link-card-desc">Central Pollution Control Board of India. Hourly PM<sub>2.5</sub> observations from Continuous Ambient Air Quality Monitoring Stations (CAAQMS) across all nine study cities. Ground truth for model training and validation.</p>
-            <span class="link-url">cpcb.nic.in</span>
+            <div class="lc-title">CPCB — India Air Quality</div>
+            <p class="lc-desc">Hourly PM<sub>2.5</sub> from CAAQMS stations across 9 study cities. Ground truth for
+              model training and validation.</p>
+            <div class="lc-url">cpcb.nic.in</div>
           </a>
 
-          <a href="https://openaq.org" target="_blank" rel="noopener noreferrer" class="link-card" id="link-openaq">
-            <div class="link-card-header">
-              <span class="link-card-title">OpenAQ — Open Air Quality Platform</span>
-              <span class="link-arrow">↗</span>
+          <a href="https://openaq.org" target="_blank" rel="noopener" class="link-card" id="link-openaq">
+            <div class="lc-top">
+              <span class="lc-category">Open Platform</span>
+              <span class="lc-arrow">↗</span>
             </div>
-            <p class="link-card-desc">Open-source platform aggregating real-time and historical air quality data from governments and research institutions worldwide, cited in the context of global monitoring infrastructure gaps.</p>
-            <span class="link-url">openaq.org</span>
+            <div class="lc-title">OpenAQ</div>
+            <p class="lc-desc">Open-source platform aggregating real-time and historical air quality data from
+              governments and research institutions worldwide.</p>
+            <div class="lc-url">openaq.org</div>
           </a>
 
-          <a href="https://xgboost.readthedocs.io" target="_blank" rel="noopener noreferrer" class="link-card" id="link-xgboost">
-            <div class="link-card-header">
-              <span class="link-card-title">XGBoost</span>
-              <span class="link-arrow">↗</span>
+          <a href="https://xgboost.readthedocs.io" target="_blank" rel="noopener" class="link-card" id="link-xgboost">
+            <div class="lc-top">
+              <span class="lc-category">ML Framework</span>
+              <span class="lc-arrow">↗</span>
             </div>
-            <p class="link-card-desc">GPU-accelerated gradient boosting library used for both model configurations. tree_method='hist' with CUDA device acceleration. Handles sparse AOD data natively via default split learning.</p>
-            <span class="link-url">xgboost.readthedocs.io</span>
+            <div class="lc-title">XGBoost</div>
+            <p class="lc-desc">GPU-accelerated gradient boosting. tree_method='hist' with CUDA. Handles sparse AOD
+              natively via default split learning.</p>
+            <div class="lc-url">xgboost.readthedocs.io</div>
           </a>
 
-          <a href="https://optuna.org" target="_blank" rel="noopener noreferrer" class="link-card" id="link-optuna">
-            <div class="link-card-header">
-              <span class="link-card-title">Optuna — Hyperparameter Optimization</span>
-              <span class="link-arrow">↗</span>
+          <a href="https://optuna.org" target="_blank" rel="noopener" class="link-card" id="link-optuna">
+            <div class="lc-top">
+              <span class="lc-category">Hyperparameter Tuning</span>
+              <span class="lc-arrow">↗</span>
             </div>
-            <p class="link-card-desc">Automatic hyperparameter optimization framework used to tune XGBoost parameters (max_depth, learning_rate, subsample, colsample_bytree, gamma, reg_lambda, reg_alpha) by minimizing RMSE on the validation set.</p>
-            <span class="link-url">optuna.org</span>
+            <div class="lc-title">Optuna</div>
+            <p class="lc-desc">Bayesian hyperparameter optimization tuning max_depth, learning_rate, subsample,
+              colsample, gamma, reg_lambda, reg_alpha.</p>
+            <div class="lc-url">optuna.org</div>
           </a>
 
-          <a href="https://shap.readthedocs.io" target="_blank" rel="noopener noreferrer" class="link-card" id="link-shap">
-            <div class="link-card-header">
-              <span class="link-card-title">SHAP — Model Interpretability</span>
-              <span class="link-arrow">↗</span>
+          <a href="https://shap.readthedocs.io" target="_blank" rel="noopener" class="link-card" id="link-shap">
+            <div class="lc-top">
+              <span class="lc-category">Interpretability</span>
+              <span class="lc-arrow">↗</span>
             </div>
-            <p class="link-card-desc">SHapley Additive exPlanations used to interpret Model B predictions. Reveals that pm25_lag1 (mean |SHAP| = 49.23) contributes ~10× more than all other features, confirming statistical persistence learning.</p>
-            <span class="link-url">shap.readthedocs.io</span>
+            <div class="lc-title">SHAP</div>
+            <p class="lc-desc">SHapley Additive exPlanations revealing pm25_lag1 (mean |SHAP| = 49.23) contributes ~10×
+              all other features combined.</p>
+            <div class="lc-url">shap.readthedocs.io</div>
           </a>
 
-          <a href="https://www.naturalearthdata.com" target="_blank" rel="noopener noreferrer" class="link-card" id="link-natural-earth">
-            <div class="link-card-header">
-              <span class="link-card-title">Natural Earth — Base Map Data</span>
-              <span class="link-arrow">↗</span>
+          <a href="https://www.naturalearthdata.com" target="_blank" rel="noopener" class="link-card"
+            id="link-naturalearth">
+            <div class="lc-top">
+              <span class="lc-category">Cartography</span>
+              <span class="lc-arrow">↗</span>
             </div>
-            <p class="link-card-desc">Public domain map dataset used as the base cartographic layer for the study area visualization showing the nine Indian cities and their geographic context (coastal vs. inland classification).</p>
-            <span class="link-url">naturalearthdata.com</span>
+            <div class="lc-title">Natural Earth</div>
+            <p class="lc-desc">Public domain map dataset used as the base cartographic layer for the study area
+              visualization of the 9 Indian cities.</p>
+            <div class="lc-url">naturalearthdata.com</div>
           </a>
-
         </div>
       </div>
     </section>
 
     <!-- References -->
-    <section class="section">
+    <section class="section reveal">
       <div class="container">
-        <div class="section-label">References</div>
-        <h2 class="section-title">Selected Literature</h2>
-        <ol class="references">
-          <li>A. Pandey et al., "Health and economic impact of air pollution in the states of India: The global burden of disease study 2019," <em>The Lancet Planetary Health</em>, vol. 5, no. 1, pp. e25–e38, 2020.</li>
-          <li>Central Pollution Control Board, "National air quality monitoring programme: Operational guidelines," tech. rep., Ministry of Environment, Forest and Climate Change, Government of India, 2026.</li>
-          <li>OpenAQ, "OpenAQ Platform." <a href="https://openaq.org" target="_blank" rel="noopener noreferrer">openaq.org</a>, 2026.</li>
-          <li>ISRO, "INSAT-3DS Level-2 Gridded Aerosol Optical Depth." <a href="https://mosdac.gov.in" target="_blank" rel="noopener noreferrer">mosdac.gov.in</a>, 2025.</li>
-          <li>Y. Liu, Z. Wang, and A. van Donkelaar, "Satellite-based estimation of surface PM<sub>2.5</sub> concentrations: A review of methods and applications," <em>Remote Sensing of Environment</em>, vol. 231, p. 111245, 2019.</li>
-          <li>M. S. Hammer et al., "Global estimates and long-term trends of fine particulate matter concentrations (1998–2018)," <em>Environmental Science &amp; Technology</em>, vol. 54, no. 13, pp. 7879–7890, 2020.</li>
-          <li>A. C. Just et al., "Geographically weighted regression for satellite-based PM<sub>2.5</sub> estimation: A comparison of methods," <em>Atmospheric Environment</em>, vol. 191, pp. 591–600, 2018.</li>
+        <div class="section-tag">07 / References</div>
+        <h2 class="section-heading">Literature</h2>
+        <ol class="ref-list">
+          <li>A. Pandey et al., "Health and economic impact of air pollution in the states of India: The global burden
+            of disease study 2019," <em>The Lancet Planetary Health</em>, vol. 5, no. 1, pp. e25–e38, 2020.</li>
+          <li>Central Pollution Control Board, "National air quality monitoring programme: Operational guidelines,"
+            tech. rep., Ministry of Environment, Government of India, 2026.</li>
+          <li>OpenAQ, "OpenAQ Platform." <a href="https://openaq.org" target="_blank">openaq.org</a>, 2026.</li>
+          <li>ISRO, "INSAT-3DS Level-2 Gridded Aerosol Optical Depth." <a href="https://mosdac.gov.in"
+              target="_blank">mosdac.gov.in</a>, 2025.</li>
+          <li>Y. Liu, Z. Wang, and A. van Donkelaar, "Satellite-based estimation of surface PM<sub>2.5</sub>
+            concentrations: A review," <em>Remote Sensing of Environment</em>, vol. 231, p. 111245, 2019.</li>
+          <li>M. S. Hammer et al., "Global estimates and long-term trends of fine particulate matter concentrations
+            (1998–2018)," <em>Environmental Science &amp; Technology</em>, vol. 54, no. 13, pp. 7879–7890, 2020.</li>
+          <li>A. C. Just et al., "Geographically weighted regression for satellite-based PM<sub>2.5</sub> estimation,"
+            <em>Atmospheric Environment</em>, vol. 191, pp. 591–600, 2018.
+          </li>
         </ol>
       </div>
     </section>
@@ -382,12 +569,30 @@
   <footer>
     <div class="container">
       <div class="footer-inner">
-        <p class="footer-title">Satellite-Augmented AI for Scalable PM<sub>2.5</sub> Monitoring in India</p>
-        <p class="footer-note">Study period: August 2025 – March 2026 · Nine cities · 640,000+ records</p>
+        <div class="footer-left">
+          <div class="footer-logo">
+            <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
+              <circle cx="9" cy="9" r="3" fill="var(--teal)" />
+              <circle cx="9" cy="9" r="6.5" stroke="var(--teal)" stroke-width="1" stroke-dasharray="3 2" />
+              <circle cx="9" cy="9" r="9" stroke="var(--teal)" stroke-width="0.5" opacity="0.4" />
+            </svg>
+          </div>
+          <div>
+            <div class="footer-title">Satellite-Augmented AI for PM<sub>2.5</sub> Monitoring</div>
+            <div class="footer-sub">Aug 2025 – Mar 2026 · 9 cities · 640,000+ records</div>
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="https://mosdac.gov.in" target="_blank">MOSDAC ↗</a>
+          <a href="https://cds.climate.copernicus.eu" target="_blank">ERA5 ↗</a>
+          <a href="https://cpcb.nic.in" target="_blank">CPCB ↗</a>
+          <a href="https://openaq.org" target="_blank">OpenAQ ↗</a>
+        </div>
       </div>
     </div>
   </footer>
 
   <script src="script.js"></script>
 </body>
+
 </html>
