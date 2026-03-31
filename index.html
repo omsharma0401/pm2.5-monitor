@@ -41,7 +41,8 @@
         <li><a href="#implications">Impact</a></li>
         <li><a href="#data-sources">Data &amp; Code</a></li>
       </ul>
-      <a href="https://drive.google.com/file/d/1lsgRkuvqbHZgvaANsk8NF1xD1phLvgur/view?usp=sharing" class="nav-cta" target="_blank">Read Paper ↗</a>
+      <a href="https://drive.google.com/file/d/1lsgRkuvqbHZgvaANsk8NF1xD1phLvgur/view?usp=sharing" class="nav-cta"
+        target="_blank">Read Paper ↗</a>
     </div>
   </nav>
 
@@ -199,7 +200,9 @@
         <h2 class="section-heading">Dual-Regime<br />Framework</h2>
 
         <div class="method-flowchart reveal">
-          <img src="flowchart.jpg" alt="Data fusion pipeline: INSAT-3DS AOD, ERA5 Meteorology and CPCB PM2.5 feed into an XGBoost model for PM2.5 prediction" class="flowchart-img" />
+          <img src="flowchart.jpg"
+            alt="Data fusion pipeline: INSAT-3DS AOD, ERA5 Meteorology and CPCB PM2.5 feed into an XGBoost model for PM2.5 prediction"
+            class="flowchart-img" />
         </div>
 
         <div class="method-grid">
@@ -303,11 +306,6 @@
             </div>
             <p class="rc-desc">Incorporates pm25_lag1 (previous hour) to capture temporal inertia — the dominant signal
               in pollution time series. Ideal for hourly forecasting and public health alert systems.</p>
-            <div class="rc-insight">
-
-              SHAP: pm25_lag1 (mean |SHAP| = 49.23) contributes <strong>~10× more</strong> than all other features
-              combined. The model learns statistical persistence, not atmospheric physics.
-            </div>
           </div>
 
           <div class="result-card physical">
@@ -334,18 +332,27 @@
             </div>
             <p class="rc-desc">Relies solely on satellite AOD and ERA5 meteorology. Deployable in cities with <em>zero
                 ground infrastructure</em>. Interpretable for policy analysis and mechanistic understanding.</p>
-            <div class="rc-insight">
-
-              AOD provides a <strong>+0.13 R² improvement</strong> during the ~7% of hours when clear-sky retrieval is
-              available — an honest, measurable signal despite 93% sparsity.
-            </div>
           </div>
         </div>
 
         <!-- SHAP plot -->
         <div class="shap-figure reveal">
-          <img src="shap_plot.jpg" alt="SHAP Mean Absolute Values: pm25_lag1 dominates with mean |SHAP| = 49.23, contributing ~10× more than all other features combined" class="shap-img" />
-          <p class="shap-caption">Model B SHAP: <code>pm25_lag1</code> (mean |SHAP| = 49.23) contributes ~10× all other features combined — the model learns temporal persistence, not atmospheric physics.</p>
+          <img src="shap_plot.png"
+            alt="SHAP Mean Absolute Values: pm25_lag1 dominates with mean |SHAP| = 49.23, contributing ~10× more than all other features combined"
+            class="shap-img" />
+          <div class="shap-insights">
+            <div class="shap-insight-item">
+              <div class="si-label">Model B — Operational</div>
+              <p>SHAP: <code>pm25_lag1</code> (mean |SHAP| = 49.23) contributes <strong>~10× more</strong> than all
+                other features combined. The model learns statistical persistence, not atmospheric physics.</p>
+            </div>
+            <div class="shap-insight-item">
+              <div class="si-label">Model B-NoLag — Physical Baseline</div>
+              <p>AOD provides a <strong>+0.13 R² improvement</strong> during the ~7% of hours when clear-sky retrieval
+                is
+                available — an honest, measurable signal despite 93% sparsity.</p>
+            </div>
+          </div>
         </div>
 
         <!-- Key Findings -->
@@ -463,7 +470,8 @@
             <span class="lc-arrow">↗</span>
           </div>
           <div class="lc-title">GitHub — Full Project Repository</div>
-          <p class="lc-desc">Complete source code, notebooks, preprocessing pipeline, model training scripts and compiled
+          <p class="lc-desc">Complete source code, notebooks, preprocessing pipeline, model training scripts and
+            compiled
             datasets. Reproducible end-to-end.</p>
           <div class="lc-url">github.com/shreya-dubey01/do_satellites_speak_of_future_rains</div>
         </a>

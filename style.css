@@ -1113,16 +1113,37 @@ footer::before {
   border-radius: 8px;
   margin-bottom: 14px;
 }
-.shap-caption {
-  font-size: 13px;
-  color: var(--text3);
-  line-height: 1.65;
-  max-width: 600px;
-  margin: 0 auto;
+.shap-insights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+  text-align: left;
 }
-.shap-caption code {
+.shap-insight-item {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.si-label {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 7px;
+}
+.shap-insight-item p {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.65;
+}
+.shap-insight-item strong { color: var(--text); font-weight: 600; }
+.shap-insight-item code {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
   color: var(--teal-mid);
   background: var(--teal-dim);
   padding: 1px 5px;
