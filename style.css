@@ -522,12 +522,7 @@ sub { font-size: 0.72em; }
 .glow-blue::before  { background: linear-gradient(90deg, var(--blue), #6ea0f6); }
 .glow-teal:last-child::before  { background: linear-gradient(90deg, #d43f3f, #f06060); }
 
-.problem-card-icon {
-  font-size: 18px;
-  margin-bottom: 14px;
-  display: block;
-  opacity: 0.55;
-}
+.problem-card-icon { display: none; }
 .problem-card-num {
   font-family: var(--font-serif);
   font-size: 2.1rem;
@@ -831,9 +826,6 @@ sub { font-size: 0.72em; }
   border-radius: 8px;
   padding: 12px 14px;
   line-height: 1.62;
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
 }
 .rc-insight strong { color: var(--text); font-weight: 600; }
 .insight-icon { flex-shrink: 0; font-size: 16px; }
@@ -1087,6 +1079,85 @@ footer::before {
   transition: color 0.15s;
 }
 .footer-links a:hover { color: var(--teal); }
+
+/* ===========================
+   FLOWCHART & SHAP FIGURES
+   =========================== */
+
+/* Methodology flowchart */
+.method-flowchart {
+  margin-bottom: 48px;
+  text-align: center;
+}
+.flowchart-img {
+  max-width: 100%;
+  width: 680px;
+  border-radius: 12px;
+  border: 1px solid var(--border2);
+  box-shadow: var(--shadow-md);
+}
+
+/* Results SHAP figure */
+.shap-figure {
+  margin-bottom: 48px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+.shap-img {
+  max-width: 100%;
+  width: 680px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+}
+.shap-caption {
+  font-size: 13px;
+  color: var(--text3);
+  line-height: 1.65;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.shap-caption code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--teal-mid);
+  background: var(--teal-dim);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* GitHub featured card */
+.link-card-github {
+  display: block;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(10,143,110,0.3);
+  background: var(--surface);
+  box-shadow: var(--shadow-md), 0 0 0 1px rgba(10,143,110,0.08);
+}
+.link-card-github:hover {
+  border-color: rgba(10,143,110,0.5);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg), 0 0 0 2px rgba(10,143,110,0.12);
+}
+.link-card-github .lc-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+.link-card-github .lc-url {
+  font-size: 11px;
+  color: var(--teal-mid);
+}
+.lc-category-github {
+  font-weight: 700;
+  font-size: 10.5px;
+  background: var(--teal-dim) !important;
+  color: var(--teal-mid) !important;
+  border-color: rgba(10,143,110,0.25) !important;
+}
 
 /* ===========================
    RESPONSIVE

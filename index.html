@@ -41,7 +41,7 @@
         <li><a href="#implications">Impact</a></li>
         <li><a href="#data-sources">Data &amp; Code</a></li>
       </ul>
-      <a href="mini_proj (1).pdf" class="nav-cta" target="_blank">Read Paper ↗</a>
+      <a href="https://drive.google.com/file/d/1lsgRkuvqbHZgvaANsk8NF1xD1phLvgur/view?usp=sharing" class="nav-cta" target="_blank">Read Paper ↗</a>
     </div>
   </nav>
 
@@ -163,19 +163,19 @@
             <div class="problem-card-sub">+ ₹10–15L annual maintenance</div>
           </div>
           <div class="problem-card glow-gold">
-            <div class="problem-card-icon">⚠</div>
+            <div class="problem-card-icon"></div>
             <div class="problem-card-num">70–90%</div>
             <div class="problem-card-label">Data gaps in Tier-2 & Tier-3 cities</div>
             <div class="problem-card-sub">Power failures, calibration drift, vandalism</div>
           </div>
           <div class="problem-card glow-blue">
-            <div class="problem-card-icon">🏙</div>
+            <div class="problem-card-icon"></div>
             <div class="problem-card-num">₹2,600 Cr</div>
             <div class="problem-card-label">Estimated cost of national ground network</div>
             <div class="problem-card-sub">Excluding recurring maintenance</div>
           </div>
           <div class="problem-card glow-teal">
-            <div class="problem-card-icon">💀</div>
+            <div class="problem-card-icon"></div>
             <div class="problem-card-num">1.67M</div>
             <div class="problem-card-label">Annual premature deaths from air pollution</div>
             <div class="problem-card-sub">Global Burden of Disease Study 2019</div>
@@ -197,6 +197,10 @@
       <div class="container">
         <div class="section-tag">03 / Methodology</div>
         <h2 class="section-heading">Dual-Regime<br />Framework</h2>
+
+        <div class="method-flowchart reveal">
+          <img src="flowchart.jpg" alt="Data fusion pipeline: INSAT-3DS AOD, ERA5 Meteorology and CPCB PM2.5 feed into an XGBoost model for PM2.5 prediction" class="flowchart-img" />
+        </div>
 
         <div class="method-grid">
           <div class="method-pipeline">
@@ -300,7 +304,7 @@
             <p class="rc-desc">Incorporates pm25_lag1 (previous hour) to capture temporal inertia — the dominant signal
               in pollution time series. Ideal for hourly forecasting and public health alert systems.</p>
             <div class="rc-insight">
-              <span class="insight-icon">⚡</span>
+
               SHAP: pm25_lag1 (mean |SHAP| = 49.23) contributes <strong>~10× more</strong> than all other features
               combined. The model learns statistical persistence, not atmospheric physics.
             </div>
@@ -331,11 +335,17 @@
             <p class="rc-desc">Relies solely on satellite AOD and ERA5 meteorology. Deployable in cities with <em>zero
                 ground infrastructure</em>. Interpretable for policy analysis and mechanistic understanding.</p>
             <div class="rc-insight">
-              <span class="insight-icon">🛰</span>
+
               AOD provides a <strong>+0.13 R² improvement</strong> during the ~7% of hours when clear-sky retrieval is
               available — an honest, measurable signal despite 93% sparsity.
             </div>
           </div>
+        </div>
+
+        <!-- SHAP plot -->
+        <div class="shap-figure reveal">
+          <img src="shap_plot.jpg" alt="SHAP Mean Absolute Values: pm25_lag1 dominates with mean |SHAP| = 49.23, contributing ~10× more than all other features combined" class="shap-img" />
+          <p class="shap-caption">Model B SHAP: <code>pm25_lag1</code> (mean |SHAP| = 49.23) contributes ~10× all other features combined — the model learns temporal persistence, not atmospheric physics.</p>
         </div>
 
         <!-- Key Findings -->
@@ -425,13 +435,11 @@
             </p>
           </div>
           <div class="future-card">
-            <div class="future-icon">🧠</div>
             <h3>City-Specific Adaptation</h3>
             <p>Hierarchical or meta-learning frameworks enabling rapid deployment to new cities with minimal ground
               calibration.</p>
           </div>
           <div class="future-card">
-            <div class="future-icon">⚡</div>
             <h3>Real-Time Pipeline</h3>
             <p>Automated ingestion → prediction → alert systems integrated with emission inventories for GRAP
               interventions.</p>
@@ -446,6 +454,19 @@
         <div class="section-tag">06 / Data &amp; Code</div>
         <h2 class="section-heading">Data Sources &amp;<br />External Links</h2>
         <p class="section-sub">All code and compiled datasets are publicly available to ensure reproducibility.</p>
+
+        <!-- GitHub: featured primary link -->
+        <a href="https://github.com/shreya-dubey01/do_satellites_speak_of_future_rains" target="_blank" rel="noopener"
+          class="link-card link-card-github" id="link-github">
+          <div class="lc-top">
+            <span class="lc-category lc-category-github">Source Code</span>
+            <span class="lc-arrow">↗</span>
+          </div>
+          <div class="lc-title">GitHub — Full Project Repository</div>
+          <p class="lc-desc">Complete source code, notebooks, preprocessing pipeline, model training scripts and compiled
+            datasets. Reproducible end-to-end.</p>
+          <div class="lc-url">github.com/shreya-dubey01/do_satellites_speak_of_future_rains</div>
+        </a>
 
         <div class="links-grid">
           <a href="https://mosdac.gov.in" target="_blank" rel="noopener" class="link-card" id="link-mosdac">
@@ -492,17 +513,6 @@
             <div class="lc-url">openaq.org</div>
           </a>
 
-          <a href="https://xgboost.readthedocs.io" target="_blank" rel="noopener" class="link-card" id="link-xgboost">
-            <div class="lc-top">
-              <span class="lc-category">ML Framework</span>
-              <span class="lc-arrow">↗</span>
-            </div>
-            <div class="lc-title">XGBoost</div>
-            <p class="lc-desc">GPU-accelerated gradient boosting. tree_method='hist' with CUDA. Handles sparse AOD
-              natively via default split learning.</p>
-            <div class="lc-url">xgboost.readthedocs.io</div>
-          </a>
-
           <a href="https://optuna.org" target="_blank" rel="noopener" class="link-card" id="link-optuna">
             <div class="lc-top">
               <span class="lc-category">Hyperparameter Tuning</span>
@@ -520,21 +530,9 @@
               <span class="lc-arrow">↗</span>
             </div>
             <div class="lc-title">SHAP</div>
-            <p class="lc-desc">SHapley Additive exPlanations revealing pm25_lag1 (mean |SHAP| = 49.23) contributes ~10×
-              all other features combined.</p>
+            <p class="lc-desc">SHapley Additive exPlanations: pm25_lag1 (mean |SHAP| = 49.23) contributes ~10× all
+              other features combined.</p>
             <div class="lc-url">shap.readthedocs.io</div>
-          </a>
-
-          <a href="https://www.naturalearthdata.com" target="_blank" rel="noopener" class="link-card"
-            id="link-naturalearth">
-            <div class="lc-top">
-              <span class="lc-category">Cartography</span>
-              <span class="lc-arrow">↗</span>
-            </div>
-            <div class="lc-title">Natural Earth</div>
-            <p class="lc-desc">Public domain map dataset used as the base cartographic layer for the study area
-              visualization of the 9 Indian cities.</p>
-            <div class="lc-url">naturalearthdata.com</div>
           </a>
         </div>
       </div>
